@@ -1,11 +1,12 @@
 import { Hono } from "hono";
 import { serveStatic } from "hono/bun";
 import { logger } from "hono/logger";
+import { customLogger } from "./config/custom-logger";
 
 const app = new Hono();
 
 // logger
-app.use(logger());
+app.use(logger(customLogger));
 
 // static file serving
 app.use("/static/*", serveStatic({ root: "./" }));
@@ -24,8 +25,9 @@ app.get(
 app.get("/", (c) => {
   return c.text("Hello Hono!");
 });
-app.get("/entry/:date/:id", (c) => {
+app.get("/entry/:id", (c) => {
   const id = c.req.param("id");
+  customLogger("custom logger", `Entry ${id}`);
   return c.text(`Entry ${id}`);
 });
 
