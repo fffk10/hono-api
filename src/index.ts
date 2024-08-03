@@ -2,6 +2,7 @@ import { Hono } from "hono";
 import { serveStatic } from "hono/bun";
 import { logger } from "hono/logger";
 import { customLogger } from "./config/custom-logger";
+import { getWarranties } from "./usecase/warranty";
 
 const app = new Hono();
 
@@ -25,14 +26,9 @@ app.get(
 app.get("/", (c) => {
   return c.text("Hello Hono!");
 });
-app.get("/entry/:id", (c) => {
-  const id = c.req.param("id");
-  customLogger("custom logger", `Entry ${id}`);
-  return c.text(`Entry ${id}`);
-});
 
-app.get("/check/error", (c) => {
-  throw new Error("request error route");
+app.get("warranties", (c) => {
+  return getWarranties(c);
 });
 
 // custom
