@@ -1,6 +1,4 @@
-import { Context } from "hono";
-
-const dummyData: Warranty[] = [
+export const dummyData: Warranty[] = [
   {
     id: 1,
     productName: "iPhone 12",
@@ -52,7 +50,3 @@ const dummyData: Warranty[] = [
     updatedAt: new Date(),
   },
 ];
-
-export const getWarranties = (c: Context) => {
-  return c.json(dummyData);
-};
