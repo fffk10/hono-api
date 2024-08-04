@@ -22,7 +22,7 @@ export default defineConfig(({ mode }) => {
       plugins: [
         pages(),
         devServer({
-          entry: "src/index.tsx",
+          entry: "src/server.tsx",
         }),
       ],
     };

@@ -31,7 +31,7 @@ app.get(
 // ============ static file ============ //
 
 // ============ api ============ //
-app.get("/api/warranties", (c) => {
+const getWarranties = app.get("/api/warranties", (c) => {
   return c.json(dummyData);
 });
 app.get("/api/clock", (c) => {
@@ -40,6 +40,7 @@ app.get("/api/clock", (c) => {
     time: new Date().toLocaleTimeString(),
   });
 });
+export type GetWarrantiesType = typeof getWarranties;
 // ============ api ============ //
 
 // ============ front ============ //

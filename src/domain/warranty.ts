@@ -2,9 +2,9 @@ type Warranty = {
   id: number;
   productName: string;
   tel: string;
-  period: Date;
-  purchaseDate: Date;
+  period: string;
+  purchaseDate: string;
   comment: string;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string;
+  updatedAt: string;
 };
