@@ -1,3 +1,4 @@
+import { UIProvider } from "@yamada-ui/react";
 import { createRoot } from "react-dom/client";
 import Layout from "./layout";
 import Home from "./home";
@@ -12,4 +13,8 @@ function App() {
 
 const domNode = document.getElementById("root")!;
 const root = createRoot(domNode);
-root.render(<App />);
+root.render(
+  <UIProvider>
+    <App />
+  </UIProvider>
+);

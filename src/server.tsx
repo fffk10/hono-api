@@ -4,6 +4,12 @@ import { logger } from "hono/logger";
 import { renderToString } from "react-dom/server";
 import { customLogger } from "./config/custom-logger";
 import { dummyData } from "./config/dummy";
+import { getCookie } from "hono/cookie";
+import {
+  ColorModeScript,
+  ThemeSchemeScript,
+  defaultConfig,
+} from "@yamada-ui/react";
 
 type Env = {
   Bindings: {
@@ -45,6 +51,9 @@ export type GetWarrantiesType = typeof getWarranties;
 
 // ============ front ============ //
 app.get("*", (c) => {
+  const colorMode: any = getCookie(c, "ui-color-mode");
+  const themeScheme = getCookie(c, "ui-theme-scheme");
+
   return c.html(
     renderToString(
       <html>
@@ -62,6 +71,16 @@ app.get("*", (c) => {
           )}
         </head>
         <body>
+          <ColorModeScript
+            type="cookie"
+            nonce="testing"
+            initialColorMode={colorMode ?? defaultConfig.initialColorMode}
+          />
+          <ThemeSchemeScript
+            type="cookie"
+            nonce="testing"
+            initialThemeScheme={themeScheme ?? defaultConfig.initialThemeScheme}
+          />
           <div id="root"></div>
         </body>
       </html>
